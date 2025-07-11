@@ -26,7 +26,7 @@ jobs:
           bash deployment/build_and_package.sh lambda_kinesis_to_dynamo event_processor.zip
       - name: Package dynamo_matcher Lambda
         run: |
-          bash deployment/build_and_package.sh src/lambda_dynamo_matcher dynamo_matcher.zip
+          bash deployment/build_and_package.sh lambda_dynamo_matcher dynamo_matcher.zip
       - name: Package kpi_aggregator Lambda
         run: |
           bash deployment/build_and_package.sh glue_kpi_aggregator kpi_aggregator.zip
