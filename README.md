@@ -1,1 +1,2 @@
 # BoLT_RiDe_daTa_InGesTiOn
+AWS_DEFAULT_REGION: 
