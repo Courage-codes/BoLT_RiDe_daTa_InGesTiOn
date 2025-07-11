@@ -64,9 +64,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
         run: |
+          # Get the current job configuration to preserve the role
+          CURRENT_JOB=$(aws glue get-job --job-name nsp-bolt-kpi-aggregator --query 'Job' --output json)
+          ROLE_ARN=$(echo $CURRENT_JOB | jq -r '.Role')
+          
           aws glue update-job \
             --job-name nsp-bolt-kpi-aggregator \
             --job-update '{
+              "Role": "'$ROLE_ARN'",
               "Command": {
                 "Name": "glueetl",
                 "ScriptLocation": "s3://aws-glue-assets-643303011741-us-east-1/scripts/glue_kpi_aggregator.py",
