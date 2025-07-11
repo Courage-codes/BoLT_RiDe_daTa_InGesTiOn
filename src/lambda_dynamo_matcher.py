@@ -1,6 +1,13 @@
 import boto3
 from src.config import Config
 from src.utils import get_logger, retry
+import os
+
+TRIPS_TABLE_NAME = os.getenv("TRIPS_TABLE_NAME")
+KINESIS_STREAM_NAME = os.getenv("KINESIS_STREAM_NAME")
+KPI_BUCKET_NAME = os.getenv("KPI_BUCKET_NAME")
+AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
+
 
 logger = get_logger("lambda_dynamo_matcher", Config.LOG_LEVEL)
 
