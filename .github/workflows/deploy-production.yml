@@ -2,7 +2,7 @@ name: Deploy to Production
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -82,9 +82,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
         run: |
+          # Get current job role
+          CURRENT_ROLE=$(aws glue get-job --job-name nsp-bolt-kpi-aggregator --query 'Job.Role' --output text)
+          
+          # Update job with current role and new dependencies
           aws glue update-job \
             --job-name nsp-bolt-kpi-aggregator \
             --job-update '{
+              "Role": "'$CURRENT_ROLE'",
               "Command": {
                 "Name": "glueetl",
                 "ScriptLocation": "s3://aws-glue-assets-643303011741-us-east-1/scripts/glue_kpi_aggregator.py",
