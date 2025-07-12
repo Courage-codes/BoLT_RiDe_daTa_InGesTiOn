@@ -3,8 +3,8 @@ from decimal import Decimal
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 import json
-from src.config import Config
-from src.utils import get_logger, retry
+from config import Config
+from utils import get_logger, retry
 
 logger = get_logger("lambda_dynamo_matcher", Config.LOG_LEVEL)
 

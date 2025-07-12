@@ -3,8 +3,8 @@ import base64
 import json
 from datetime import datetime, timedelta
 from decimal import Decimal
-from src.config import Config
-from src.utils import get_logger, retry
+from config import Config
+from utils import get_logger, retry
 import os
 from typing import Dict, Any
 
@@ -88,20 +88,20 @@ class TripIngestionProcessor:
         event_type = data.get('event_type')
         
         if event_type == 'trip_begin':
-            return self._validate_trip_start(data)
+            return self._validate_trip_begin(data)
         elif event_type == 'trip_end':
             return self._validate_trip_end(data)
         else:
             return data
     
-    def _validate_trip_start(self, data: Dict[str, Any]) -> Dict[str, Any]:
+    def _validate_trip_begin(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Validate trip start event data"""
         # Required fields for trip start
         required_fields = ['trip_id', 'pickup_location_id', 'vendor_id', 'pickup_datetime']
         
         for field in required_fields:
             if field not in data or data[field] is None:
-                logger.warning(f"Missing required field {field} in trip_start event")
+                logger.warning(f"Missing required field {field} in trip_begin event")
         
         # Validate pickup location ID
         if 'pickup_location_id' in data:
