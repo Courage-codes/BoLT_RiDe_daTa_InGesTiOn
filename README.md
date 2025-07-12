@@ -253,7 +253,7 @@ aws lambda create-function \
   --environment Variables='{
     "TRIPS_TABLE_NAME": "nsp_bolt_trips",
     "LOG_LEVEL": "INFO",
-    "DLQ_URL": "https://sqs.us-east-1.amazonaws.com/643303011741/bolt-ride-dlq"
+    "DLQ_URL": "https://sqs.us-east-1.amazonaws.com/your-account-id/bolt-ride-dlq"
   }'
 ```
 
@@ -479,7 +479,7 @@ aws logs filter-log-events --log-group-name /aws/lambda/bolt-ride-ingestion --fi
       "Action": [
         "sqs:SendMessage"
       ],
-      "Resource": "arn:aws:sqs:us-east-1:643303011741:bolt-ride-dlq"
+      "Resource": "arn:aws:sqs:us-east-1:your-account-id:bolt-ride-dlq"
     }
   ]
 }
