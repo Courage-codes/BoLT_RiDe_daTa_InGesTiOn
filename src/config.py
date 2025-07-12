@@ -6,3 +6,5 @@ class Config:
     KPI_BUCKET = os.getenv("KPI_BUCKET_NAME", "nsp-bolt-kpi-output")
     REGION = os.getenv("AWS_REGION", "us-east-1")
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+    DYNAMODB_READ_THROUGHPUT_PERCENT = float(os.getenv("DYNAMODB_READ_PERCENT", "0.5"))
+    DYNAMODB_SPLITS = int(os.getenv("DYNAMODB_SPLITS", "100"))
